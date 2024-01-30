@@ -30,3 +30,16 @@ export const checkingUserExists = async (
 
   return next();
 };
+
+export const checkingUserPhone = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const { contactNumber } = req.body;
+  const user: User | null = await userRepository.findOneBy({ contactNumber });
+
+  if (user) throw new AppError("Phone already exists", 409);
+
+  return next();
+};
