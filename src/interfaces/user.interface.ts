@@ -1,7 +1,11 @@
 import { z } from "zod";
 import { DeepPartial, Repository } from "typeorm";
 import User from "../entities/users.entity";
-import { createUserSchema, userLoginSchema, userReturnSchema } from "../schemas/user.schema";
+import {
+  createUserSchema,
+  userLoginSchema,
+  userReturnSchema,
+} from "../schemas/user.schema";
 
 export type TUserCreate = z.infer<typeof createUserSchema>;
 export type TUserBodyUpdate = Omit<TUserCreate, "admin">;

@@ -7,7 +7,6 @@ import {
 } from "typeorm";
 import User from "./users.entity";
 
-
 @Entity("contacts")
 class Contact {
   @PrimaryGeneratedColumn("increment")
@@ -19,15 +18,14 @@ class Contact {
   @Column({ length: 45, unique: true })
   email: string;
 
-  @Column({type: "numeric", precision: 15, scale: 0, unique: true})
+  @Column({ type: "numeric", precision: 15, scale: 0, unique: true })
   contactNumber: number;
 
   @CreateDateColumn({ type: "date" })
   createdAt: string;
 
-  @ManyToOne(() => User, user => user.contacts)
-    user: User;
+  @ManyToOne(() => User)
+  user: User;
 }
-
 
 export default Contact;

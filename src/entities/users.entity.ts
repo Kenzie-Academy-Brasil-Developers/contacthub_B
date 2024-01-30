@@ -18,20 +18,20 @@ class User {
   @Column({ length: 45, unique: true })
   email: string;
 
-  @Column({ type: "boolean", default: false})
+  @Column({ type: "boolean", default: false })
   admin: boolean;
 
   @Column({ length: 120 })
   password: string;
 
-  @Column({type: "numeric", precision: 15, scale: 0, unique: true})
+  @Column({ type: "numeric", unique: true })
   contactNumber: number;
 
   @CreateDateColumn({ type: "date" })
   createdAt: string;
 
   @OneToMany(() => Contact, (contact) => contact.user)
-  contacts: Contact[]
+  contacts: Contact[];
 }
 
 export default User;
