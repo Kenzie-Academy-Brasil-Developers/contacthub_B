@@ -18,6 +18,8 @@ import {
 } from "../middlewares/contact.middleware";
 
 export const contactRouter: Router = Router();
+contactRouter.use("/contact", contactRouter)
+
 
 contactRouter.post(
   "/",
@@ -29,8 +31,12 @@ contactRouter.post(
   createContactController
 );
 
+
 contactRouter.get("/:id", checkingToken, readContacSpecificController);
-contactRouter.get("/", checkingToken, readAllContactController);
+
+contactRouter.get("/all/contacts", checkingToken, readAllContactController);
+
+
 contactRouter.patch(
   "/:id",
   checkingToken,
@@ -39,4 +45,6 @@ contactRouter.patch(
   checkingContactPhone,
   updateContactController
 );
-contactRouter.delete("/:id", deleteContactController);
+
+
+contactRouter.delete("/:id", checkingToken, deleteContactController);

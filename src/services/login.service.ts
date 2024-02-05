@@ -26,5 +26,6 @@ export const loginService = async (data: TUserLogin): Promise<TLoginReturn> => {
     process.env.SECRET_KEY!,
     { subject: user.id.toString(), expiresIn: process.env.EXPIRES_IN! }
   );
+
   return { token };
 };

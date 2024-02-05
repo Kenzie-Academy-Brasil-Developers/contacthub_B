@@ -12,25 +12,12 @@ export const checkingBody =
     return next();
   };
 
-export const checkingAdmin = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-): void => {
-  const { admin } = res.locals.decoded;
-
-  if (!admin) throw new AppError("Insufficient permission", 403);
-
-  return next();
-};
-
 export const checkingToken = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   const headerTokenData = req.headers.authorization;
-
   if (!headerTokenData) {
     return res.status(401).json({ message: "Invalid token" });
   }
@@ -44,6 +31,19 @@ export const checkingToken = (
       });
     }
     res.locals.userId = decoded.sub;
+    res.locals.admin = decoded.admin;
     return next();
   });
+};
+
+export const checkingAdmin = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  const { admin } = res.locals;
+
+  if (!admin) throw new AppError("Insufficient permission", 403);
+
+  return next();
 };

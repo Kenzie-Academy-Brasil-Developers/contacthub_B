@@ -1,9 +1,11 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { TUserReturn } from "../interfaces/user.interface";
 import {
   createUserService,
   updateUserService,
   deleteUserService,
+  readAllUsersService,
+  readUserSpecificService,
 } from "../services/user.service";
 
 export const createUserController = async (
@@ -17,6 +19,26 @@ export const createUserController = async (
     createdAt: user.createdAt.toString(),
   };
   return res.status(201).json(formattedUser);
+};
+
+export const readAllUsersController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const users = await readAllUsersService();
+
+  return res.status(200).json(users);
+};
+
+export const readUserSpecificController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<Response> => {
+  const UserId: number = Number(req.params.id);
+  const user: TUserReturn = await readUserSpecificService(UserId);
+
+  return res.status(200).json(user);
 };
 
 export const updateUserController = async (

@@ -3,8 +3,11 @@ import {
   createUserController,
   updateUserController,
   deleteUserController,
+  readAllUsersController,
+  readUserSpecificController,
 } from "../controllers/user.controller";
 import {
+  checkingAdmin,
   checkingBody,
   checkingToken,
 } from "../middlewares/globals.middlewares";
@@ -16,13 +19,28 @@ import {
 import { createUserSchema, userUpdateSchema } from "../schemas/user.schema";
 
 export const userRouter: Router = Router();
+userRouter.use("/users", userRouter);
 
 userRouter.post(
-  "/",
+  "/users",
   checkingBody(createUserSchema),
   checkingUserEmail,
   checkingUserPhone,
   createUserController
+);
+
+userRouter.get(
+  "/all/users",
+  checkingToken,
+  checkingAdmin,
+  readAllUsersController
+);
+
+userRouter.get(
+  "/:id",
+  checkingToken,
+  checkingAdmin,
+  readUserSpecificController
 );
 
 userRouter.patch(
@@ -34,9 +52,11 @@ userRouter.patch(
   checkingUserPhone,
   updateUserController
 );
+
 userRouter.delete(
   "/:id",
   checkingToken,
+  checkingAdmin,
   checkingUserExists,
   deleteUserController
 );

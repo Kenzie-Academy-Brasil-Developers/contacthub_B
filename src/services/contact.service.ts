@@ -31,7 +31,7 @@ export const createContactService = async (
   await contactRepository.save(contact);
   return contactSchema.parse(contact);
 };
- 
+
 export const readContacSpecificService = async (
   id: number
 ): Promise<Contact> => {
@@ -67,8 +67,9 @@ export const updateContactService = async (
   const updatedContact: Contact = { ...contactToUpdate, ...data };
 
   await contactRepository.save(updatedContact);
-  const parsedUpdatedContact: TContactReturn = contactReturnSchema.parse(updatedContact);
-  
+  const parsedUpdatedContact: TContactReturn =
+    contactReturnSchema.parse(updatedContact);
+
   return parsedUpdatedContact;
 };
 

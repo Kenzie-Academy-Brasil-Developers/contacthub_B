@@ -16,5 +16,5 @@ export const createNewContactSchema = contactSchema.omit({
   user: true,
 });
 export const contactUpdateSchema = createNewContactSchema.partial();
-export const contactReadSchema = contactSchema.array();
 export const contactReturnSchema = contactSchema.omit({ user: true });
+export const contactReadSchema = contactSchema.array();
