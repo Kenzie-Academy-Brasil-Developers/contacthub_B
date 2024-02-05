@@ -7,7 +7,7 @@
     "dev": "ts-node-dev --rs --cls --ignore-watch node_modules src/server.ts",
     "typeorm": "typeorm-ts-node-commonjs",
     "build": "tsc",
-    "start": "node dist/server.ts"
+    "start": "node dist/server.js"
   },
   "keywords": [],
   "author": "",
