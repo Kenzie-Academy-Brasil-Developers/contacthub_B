@@ -159,7 +159,6 @@ Content-type: application/json
 ```
 201 Created
 ```
-### Exemplo de Response:
 ```json
 {
 	"id": "1",
