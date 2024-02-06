@@ -180,7 +180,7 @@ Content-type: application/json
 
 [ Voltar aos Endpoints ](#5-endpoints)
 
-### `/users`
+### `/users/all/users`
 
 ### Exemplo de Request:
 ```
@@ -256,3 +256,51 @@ Vazio
 | Código do Erro | Descrição |
 |----------------|-----------|
 | 404 Not Found   | User not found. |
+
+
+### 1.3. **Deleção de usuários por ID**
+
+[ Voltar aos Endpoints ](#5-endpoints)
+
+### `/users/:id`
+
+### Exemplo de Request:
+```
+GET /users/1
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+| Parâmetro   | Tipo        | Descrição                             |
+|-------------|-------------|---------------------------------------|
+|      id     | string      | Identificador único do usuário (User) |
+
+### Corpo da Requisição:
+```json
+	"name": "user2",
+	"email": "user2@mail.com",
+	"password": 12345
+```
+
+### Exemplo de Response:
+```
+200 OK
+```
+```json
+{
+	"id": "1",
+	"name": "user2",
+	"email": "user2@mail.com",
+	"isAdm": true,
+	"createdAt": 06/02/2024
+}
+```
+
+### Possíveis Erros:
+| Código do Erro | Descrição |
+|----------------|-----------|
+| 404 Not Found   | User not found. |
+| 409 Conflict   | Email already registered.|
+| 409 Conflict   | Phone number already registered.|
+| 409 Conflict   | Name number already registered.|
