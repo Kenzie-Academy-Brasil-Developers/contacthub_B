@@ -257,7 +257,7 @@ Vazio
 |----------------|-----------|
 | 404 Not Found   | User not found. |
 
-
+---
 ### 1.4. **Atualização de usuários por ID**
 
 [ Voltar aos Endpoints ](#5-endpoints)
@@ -304,7 +304,7 @@ Content-type: application/json
 | 409 Conflict   | Email already registered.|
 | 409 Conflict   | Phone number already registered.|
 | 409 Conflict   | Name number already registered.|
-
+---
 ### 1.5. **Deleção de usuários por ID**
 
 [ Voltar aos Endpoints ](#5-endpoints)
@@ -342,3 +342,4 @@ vazio
 | Código do Erro | Descrição |
 |----------------|-----------|
 | 404 Not Found   | User not found. |
+---
