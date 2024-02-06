@@ -82,7 +82,9 @@ yarn typeorm migration:run -d src/data-source.ts
 | GET      |/contact/all/contacts| 
 | PATCH     |/contact/:id|
 | DELETE     |/contact/:id|
--A autenticação é feita por meio do Login (|POST | /login|), gerando um token(Bearer Token) de acesso.
+
+
+A autenticação é feita por meio do Login (|POST | /login|), gerando um token(Bearer Token) de acesso.
 
 ## 5. Endpoints
 
