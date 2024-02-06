@@ -96,7 +96,7 @@ A autenticação é feita por meio do Login (|POST | /login|), gerando um token(
   - [GET - /users/all/users](#12-listando-usuários)
   - [GET - /users/:id](#13-listar-usuário-por-id)
   - [PATCH - /users/:id](#14-atualizando-usuário)
-  - [DELETE - /users/:id](#12-deletando-usuário)
+  - [DELETE - /users/:id](#15-deletando-usuário)
 - [Contacts](#2-contacts)
   - [POST - /contact](#11-criação-de-contato)
   - [GET - /contact/all/contacts](#12-listando-contatos)
@@ -258,7 +258,7 @@ Vazio
 | 404 Not Found   | User not found. |
 
 
-### 1.3. **Deleção de usuários por ID**
+### 1.4. **Atualização de usuários por ID**
 
 [ Voltar aos Endpoints ](#5-endpoints)
 
@@ -304,3 +304,41 @@ Content-type: application/json
 | 409 Conflict   | Email already registered.|
 | 409 Conflict   | Phone number already registered.|
 | 409 Conflict   | Name number already registered.|
+
+### 1.5. **Deleção de usuários por ID**
+
+[ Voltar aos Endpoints ](#5-endpoints)
+
+### `/users/:id`
+
+### Exemplo de Request:
+```
+GET /users/1
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+| Parâmetro   | Tipo        | Descrição                             |
+|-------------|-------------|---------------------------------------|
+|      id     | string      | Identificador único do usuário (User) |
+
+### Corpo da Requisição:
+```json
+vazio
+```
+
+### Exemplo de Response:
+```
+200 OK
+```
+```json
+{
+vazio
+}
+```
+
+### Possíveis Erros:
+| Código do Erro | Descrição |
+|----------------|-----------|
+| 404 Not Found   | User not found. |
