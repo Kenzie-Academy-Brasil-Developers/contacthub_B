@@ -24,7 +24,6 @@ Visão geral do projeto, um pouco das tecnologias usadas.
 - [TypeORM](https://typeorm.io/)
 
 A URL base da aplicação em produção: https://contacthubws.onrender.com
-local: http://localhost:<port>
 ---
 
 ## 2. Diagrama ER
@@ -120,7 +119,7 @@ O objeto User é definido como:
 | email          | string | O e-mail do usuário.                            |
 | password       | string | A senha de acesso do usuário                    |
 | contactNumber  | number | A senha de acesso do usuário                    |
-| isAdm          | boolean| Define se um usuário é Administrador ou não.    |
+| admin          | boolean| Define se um usuário é Administrador ou não.    |
 | createdAt      | date   | Data de criação do usuário                      |
 
 ### Endpoints
@@ -143,7 +142,6 @@ O objeto User é definido como:
 ### Exemplo de Request:
 ```
 POST /users
-Host: http://suaapi.com/v1
 Authorization: None
 Content-type: application/json
 ```
@@ -151,51 +149,24 @@ Content-type: application/json
 ### Corpo da Requisição:
 ```json
 {
-	"name": "eDuArDo",
-	"email": "edu@mail.com",
+	"name": "user",
+	"email": "user@mail.com",
 	"password": "1234",
-	"isAdm": true
+	"admin": true,
 }
 ```
-
-### Schema de Validação com Yup:
-```javascript
-name: yup
-        .string()
-	.required()
-	.transform((value, originalValue) => { 
-		return titlelify(originalValue) 
-	}),
-email: yup
-        .string()
-	.email()
-	.required()
-	.transform((value, originalValue) => { 
-		return originalValue.toLowerCase() 
-	}),
-password: yup
-        .string()
-	.required()
-	.transform((value, originalValue) => { 
-		return bcrypt.hashSync(originalValue, 10) 
-	}),
-isAdm: yup
-        .boolean()
-	.required(),
-```
-OBS.: Chaves não presentes no schema serão removidas.
-
 ### Exemplo de Response:
 ```
 201 Created
 ```
-
+### Exemplo de Response:
 ```json
 {
-	"id": "9cda28c9-e540-4b2c-bf0c-c90006d37893",
-	"name": "Eduardo",
-	"email": "edu@mail.com",
-	"isAdm": true
+	"id": "1",
+	"name": "user",
+	"email": "user@mail.com",
+	"isAdm": true,
+	"createdAt": 06/02/2023
 }
 ```
 
