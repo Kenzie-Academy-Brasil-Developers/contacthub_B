@@ -23,10 +23,8 @@ Visão geral do projeto, um pouco das tecnologias usadas.
 - [PostgreSQL](https://www.postgresql.org/)
 - [TypeORM](https://typeorm.io/)
 
-A URL base da aplicação:
-local: http://localhost:3000
-produção:
-
+A URL base da aplicação em produção: https://contacthubws.onrender.com
+local: http://localhost:<port>
 ---
 
 ## 2. Diagrama ER
@@ -72,10 +70,18 @@ yarn typeorm migration:run -d src/data-source.ts
 ## 4. Autenticação
 [ Voltar para o topo ](#tabela-de-conteúdos)
 
-
-Por enquanto, não foi implementada autenticação.
-
----
+-É preciso estar autenticado para acessar as seguintes rotas:
+| Método   | Rota       | 
+|----------|------------|
+| GET      | /users/all/users| 
+| GET      | /users/:user_id|
+| PATCH      |/users/:user_id|
+| DELETE     |/users/:user_id|
+| POST      |/contact| 
+| GET      |/contact/:id| 
+| GET      |/contact/all/contacts| 
+| PATCH     |/contact/:id|
+| DELETE     |/contact/:id|
 
 ## 5. Endpoints
 
