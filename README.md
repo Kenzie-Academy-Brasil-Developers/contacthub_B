@@ -1,6 +1,6 @@
 # Documentação da API - Contact Hub
 
-## Tabela de Conteúdos
+## Tópicos de conteúdos
 
 - [Visão Geral](#1-visão-geral)
 - [Diagrama ER](#2-diagrama-er)
@@ -15,7 +15,7 @@
 
 ## 1. Visão Geral
 
-Visão geral do projeto, um pouco das tecnologias usadas.
+Tecnologias usadas no desenvolvimento desta api:
 
 - [NodeJS](https://nodejs.org/en/)
 - [Express](https://expressjs.com/pt-br/)
@@ -185,8 +185,7 @@ Content-type: application/json
 ### Exemplo de Request:
 ```
 GET /users
-Host: http://suaapi.com/v1
-Authorization: None
+Authorization: Bearer Token
 Content-type: application/json
 ```
 
@@ -202,16 +201,17 @@ Vazio
 ```json
 [
 	{
-		"id": "9cda28c9-e540-4b2c-bf0c-c90006d37893",
-		"name": "Eduardo",
-		"email": "edu@mail.com",
+		"id": "1",
+		"name": "user",
+		"email": "user@mail.com",
 		"isAdm": true
+		"createdAt": 06/02/2024
 	}
 ]
 ```
 
 ### Possíveis Erros:
-Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
+Se nenhum usuário cadastrado, irá retornar uma lista vazia.
 
 ---
 
@@ -219,20 +219,19 @@ Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
 
 [ Voltar aos Endpoints ](#5-endpoints)
 
-### `/users/:user_id`
+### `/users/:id`
 
 ### Exemplo de Request:
 ```
-GET /users/9cda28c9-e540-4b2c-bf0c-c90006d37893
-Host: http://suaapi.com/v1
-Authorization: None
+GET /users/1
+Authorization: Bearer Token
 Content-type: application/json
 ```
 
 ### Parâmetros da Requisição:
 | Parâmetro   | Tipo        | Descrição                             |
 |-------------|-------------|---------------------------------------|
-| user_id     | string      | Identificador único do usuário (User) |
+|      id     | string      | Identificador único do usuário (User) |
 
 ### Corpo da Requisição:
 ```json
@@ -245,10 +244,11 @@ Vazio
 ```
 ```json
 {
-	"id": "9cda28c9-e540-4b2c-bf0c-c90006d37893",
-	"name": "Eduardo",
-	"email": "edu@mail.com",
-	"isAdm": true
+	"id": "1",
+	"name": "user",
+	"email": "user@mail.com",
+	"isAdm": true,
+	"createdAt": 06/02/2024
 }
 ```
 
