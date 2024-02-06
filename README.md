@@ -129,8 +129,9 @@ O objeto User é definido como:
 |----------|------------|-----------------------------------------|
 | POST     | /users     | Criação de um usuário.                  |
 | GET      | /users     | Lista todos os usuários                 |
-| GET      | /users/:user_id     | Lista um usuário usando seu ID como parâmetro 
-
+| GET      | /users/:id | Lista um usuário usando seu ID como parâmetro|
+| PATCH      |/users/:id| Atualização de um usuário usando seu id como parâmetro|
+| DELETE     |/users/:id| Deleção de um usuário usando seu id como parâmetro|
 ---
 
 ### 1.1. **Criação de Usuário**
