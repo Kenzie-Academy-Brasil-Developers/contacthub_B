@@ -155,7 +155,7 @@ Content-type: application/json
 	"admin": true,
 }
 ```
-### Exemplo de Response:
+
 ```
 201 Created
 ```
