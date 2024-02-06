@@ -71,13 +71,18 @@ yarn typeorm migration:run -d src/data-source.ts
 [ Voltar para o topo ](#tabela-de-conteúdos)
 
 -É preciso estar autenticado para acessar as seguintes rotas:
-| Método   | Rota(USER) | | Método   | Rota(CONTACTS) | 
-|----------|------------| | POST      |/contact| 
-| GET      | /users/all/users| | GET      |/contact/:id| 
-| GET      | /users/:user_id| | GET      |/contact/all/contacts| 
-| PATCH      |/users/:user_id| | PATCH     |/contact/:id|
-| DELETE     |/users/:user_id| | DELETE     |/contact/:id|
-
+| Método   | Rota(USER) | 
+|----------|------------| 
+| GET      | /users/all/users| 
+| GET      | /users/:id|  
+| PATCH      |/users/:id| 
+| DELETE     |/users/:id| 
+| POST      |/contact| 
+| GET      |/contact/:id| 
+| GET      |/contact/all/contacts| 
+| PATCH     |/contact/:id|
+| DELETE     |/contact/:id|
+-A autenticação é feita por meio do Login (|POST | /login|), gerando um token(Bearer Token) de acesso.
 
 ## 5. Endpoints
 
@@ -88,11 +93,17 @@ yarn typeorm migration:run -d src/data-source.ts
 - [Users](#1-users)
   - [POST - /users](#11-criação-de-usuário)
   - [GET - /users/all/users](#12-listando-usuários)
-	- [GET - /users/:id](#13-listar-usuário-por-id)
-  - [PATCH - /users/:id](#14-listando-usuários)
-  - [DELETE - /users/:id](#12-listando-usuários)
+  - [GET - /users/:id](#13-listar-usuário-por-id)
+  - [PATCH - /users/:id](#14-atualizando-usuário)
+  - [DELETE - /users/:id](#12-deletando-usuário)
 - [Contacts](#2-contacts)
+  - [POST - /contact](#11-criação-de-contato)
+  - [GET - /contact/all/contacts](#12-listando-contatos)
+  - [GET - /contact/:id](#13-listar-contato-por-id)
+  - [PATCH - contact/:id](#14-atualizando-contato)
+  - [DELETE - /contact/:id](#12-deletando-contato)
 - [Login](#3-login)
+  - [POST - /login](#11-logando-um-usuário)
 ---
 
 ## 1. **Users**
