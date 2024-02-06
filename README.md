@@ -71,18 +71,13 @@ yarn typeorm migration:run -d src/data-source.ts
 [ Voltar para o topo ](#tabela-de-conteúdos)
 
 -É preciso estar autenticado para acessar as seguintes rotas:
-| Método   | Rota(USER) | 
-|----------|------------|
-| GET      | /users/all/users| 
-| GET      | /users/:user_id|
-| PATCH      |/users/:user_id|
-| DELETE     |/users/:user_id|
-| Método   | Rota(CONTACTS) | 
-| POST      |/contact| 
-| GET      |/contact/:id| 
-| GET      |/contact/all/contacts| 
-| PATCH     |/contact/:id|
-| DELETE     |/contact/:id|
+| Método   | Rota(USER) | | Método   | Rota(CONTACTS) | 
+|----------|------------| | POST      |/contact| 
+| GET      | /users/all/users| | GET      |/contact/:id| 
+| GET      | /users/:user_id| | GET      |/contact/all/contacts| 
+| PATCH      |/users/:user_id| | PATCH     |/contact/:id|
+| DELETE     |/users/:user_id| | DELETE     |/contact/:id|
+
 
 ## 5. Endpoints
 
