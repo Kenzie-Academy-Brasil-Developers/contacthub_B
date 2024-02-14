@@ -150,7 +150,9 @@ Content-type: application/json
 
 ### Corpo da Requisição:
 ```json
+{
 Vazio
+}
 ```
 
 ### Exemplo de Response:
