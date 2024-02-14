@@ -1,16 +1,4 @@
 # Documentação da API - Contact Hub
-
-## Tópicos de conteúdos
-
-- [Visão Geral](#1-visão-geral)
-- [Diagrama ER](#2-diagrama-er)
-- [Início Rápido](#3-início-rápido)
-    - [Instalando Dependências](#31-instalando-dependências)
-    - [Variáveis de Ambiente](#32-variáveis-de-ambiente)
-    - [Migrations](#33-migrations)
-- [Autenticação](#4-autenticação)
-- [Endpoints](#5-endpoints)
-
 ---
 
 ## 1. Visão Geral
@@ -82,30 +70,7 @@ yarn typeorm migration:run -d src/data-source.ts
 | PATCH     |/contact/:id|
 | DELETE     |/contact/:id|
 
-
 A autenticação é feita por meio do Login (|POST | /login|), gerando um token(Bearer Token) de acesso.
-
-## 5. Endpoints
-
-[ Voltar para o topo ](#tabela-de-conteúdos)
-
-### Índice
-
-- [Users](#1-users)
-  - [POST - /users](#11-criação-de-usuário)
-  - [GET - /users/all/users](#12-listando-usuários)
-  - [GET - /users/:id](#13-listar-usuário-por-id)
-  - [PATCH - /users/:id](#14-atualizando-usuário)
-  - [DELETE - /users/:id](#15-deletando-usuário)
-- [Contacts](#2-contacts)
-  - [POST - /contact](#11-criação-de-contato)
-  - [GET - /contact/all/contacts](#12-listando-contatos)
-  - [GET - /contact/:id](#13-listar-contato-por-id)
-  - [PATCH - contact/:id](#14-atualizando-contato)
-  - [DELETE - /contact/:id](#12-deletando-contato)
-- [Login](#3-login)
-  - [POST - /login](#11-logando-um-usuário)
----
 
 ## 1. **Users**
 [ Voltar para os Endpoints ](#5-endpoints)
