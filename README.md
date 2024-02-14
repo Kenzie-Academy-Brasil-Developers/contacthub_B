@@ -24,11 +24,7 @@ Diagrama ER da API definindo bem as relações entre as tabelas do banco de dado
 
 ---
 
-## 3. Início Rápido
-[ Voltar para o topo ](#tabela-de-conteúdos)
-
-
-### 3.1. Instalando Dependências
+### 3 Instalando Dependências
 
 Clone o projeto em sua máquina e instale as dependências com o comando:
 
@@ -36,7 +32,7 @@ Clone o projeto em sua máquina e instale as dependências com o comando:
 npm install
 ```
 
-### 3.2. Variáveis de Ambiente
+### 3.1. Variáveis de Ambiente
 
 Em seguida, crie um arquivo **.env**, copiando o formato do arquivo **.env.example**:
 ```
@@ -45,17 +41,15 @@ cp .env.example .env
 
 Configure suas variáveis de ambiente com suas credenciais do Postgres e uma nova database da sua escolha.
 
-### 3.3. Migrations
+### 3.2. Migrations
 
 Execute as migrations com o comando:
 
 ```
-yarn typeorm migration:run -d src/data-source.ts
+npm typeorm migration:run -d src/data-source.ts
 ```
-
 ---
 ## 4. Autenticação
-[ Voltar para o topo ](#tabela-de-conteúdos)
 
 -É preciso estar autenticado para acessar as seguintes rotas:
 | Método   | Rota(USER) | 
@@ -70,7 +64,7 @@ yarn typeorm migration:run -d src/data-source.ts
 | PATCH     |/contact/:id|
 | DELETE     |/contact/:id|
 
-A autenticação é feita por meio do Login (|POST | /login|), gerando um token(Bearer Token) de acesso.
+##4.1. A autenticação é feita por meio do Login (|POST | /login|), gerando um token(Bearer Token) de acesso.
 
 ## 1. **Users**
 [ Voltar para os Endpoints ](#5-endpoints)
@@ -87,7 +81,7 @@ O objeto User é definido como:
 | admin          | boolean| Define se um usuário é Administrador ou não.    |
 | createdAt      | date   | Data de criação do usuário                      |
 
-### Endpoints
+###1.1. Endpoints
 
 | Método   | Rota       | Descrição                               |
 |----------|------------|-----------------------------------------|
@@ -98,7 +92,7 @@ O objeto User é definido como:
 | DELETE     |/users/:id| Deleção de um usuário usando seu id como parâmetro|
 ---
 
-### 1.1. **Criação de Usuário**
+### 1.2. **Criação de Usuário**
 
 [ Voltar para os Endpoints ](#5-endpoints)
 
@@ -141,7 +135,7 @@ Content-type: application/json
 
 ---
 
-### 1.2. **Listando Usuários**
+### 1.3. **Listando Usuários**
 
 [ Voltar aos Endpoints ](#5-endpoints)
 
@@ -180,7 +174,7 @@ Se nenhum usuário cadastrado, irá retornar uma lista vazia.
 
 ---
 
-### 1.3. **Listar Usuário por ID**
+### 1.4. **Listar Usuário por ID**
 
 [ Voltar aos Endpoints ](#5-endpoints)
 
