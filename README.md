@@ -64,7 +64,7 @@ npm typeorm migration:run -d src/data-source.ts
 | PATCH     |/contact/:id|
 | DELETE     |/contact/:id|
 
-##4.1. A autenticação é feita por meio do Login (|POST | /login|), gerando um token(Bearer Token) de acesso.
+##4.1. A autenticação é feita por meio do Login (POST /login), gerando um token (Bearer Token) de acesso.
 
 ## 1. **Users**
 [ Voltar para os Endpoints ](#5-endpoints)
@@ -110,6 +110,7 @@ Content-type: application/json
 {
 	"name": "user",
 	"email": "user@mail.com",
+	"contactNumber": 35998776644,
 	"password": "1234",
 	"admin": true,
 }
@@ -123,6 +124,7 @@ Content-type: application/json
 	"id": "1",
 	"name": "user",
 	"email": "user@mail.com",
+	"contactNumber": 35998776644,
 	"isAdm": true,
 	"createdAt": 06/02/2023
 }
@@ -165,6 +167,7 @@ Vazio
 		"id": "1",
 		"name": "user",
 		"email": "user@mail.com",
+		"contactNumber": 35998776644,
 		"isAdm": true
 		"createdAt": 06/02/2024
 	}
@@ -208,6 +211,7 @@ Vazio
 	"id": "1",
 	"name": "user",
 	"email": "user@mail.com",
+	"contactNumber": 35998776644,
 	"isAdm": true,
 	"createdAt": 06/02/2024
 }
@@ -241,7 +245,8 @@ Content-type: application/json
 ```json
 	"name": "user2",
 	"email": "user2@mail.com",
-	"password": 12345
+	"contactNumber": 35998756786,
+	"password": "12345"
 ```
 
 ### Exemplo de Response:
@@ -253,6 +258,7 @@ Content-type: application/json
 	"id": "1",
 	"name": "user2",
 	"email": "user2@mail.com",
+	"contactNumber": 35998756786,
 	"isAdm": true,
 	"createdAt": 06/02/2024
 }
@@ -261,7 +267,7 @@ Content-type: application/json
 ### Possíveis Erros:
 | Código do Erro | Descrição |
 |----------------|-----------|
-| 404 Not Found   | User not found. |
+| 404 Not Found  | User not found. |
 | 409 Conflict   | Email already registered.|
 | 409 Conflict   | Phone number already registered.|
 | 409 Conflict   | Name number already registered.|
@@ -304,3 +310,241 @@ vazio
 |----------------|-----------|
 | 404 Not Found   | User not found. |
 ---
+
+## 2. **Contacts**
+
+O objeto Contact é definido como:
+
+| Campo          | Tipo   | Descrição                                       |
+| ---------------|--------|-------------------------------------------------|
+| id             | number | Identificador único do contato                  |
+| name           | string | O nome do contato.                              |
+| email          | string | O e-mail do contato.                            |
+| contactNumber  | number | Número de telefone do contato.                  |
+| createdAt      | date   | Data de criação do contato.                     |
+
+###1.1. Endpoints
+
+| Método   | Rota       | Descrição                               |
+|----------|------------|-----------------------------------------|
+| POST     | /contact     | Criação de um contato.                  |
+| GET      | /contact     | Lista todos os contatos.                 |
+| GET      | /contact/:id | Lista um contato usando seu ID como parâmetro|
+| PATCH      |/contact/:id| Atualização de um contato usando seu id como parâmetro|
+| DELETE     |/contact/:id| Deleção de um contato usando seu id como parâmetro|
+---
+
+### 1.2. **Criação de Contato**
+
+### `/contact`
+
+### Exemplo de Request:
+```
+POST /contact
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+```json
+{
+	"name": "Marcos",
+	"email": "marcos@mail.com",
+	"contactNumber": "35991755445",
+}
+```
+
+```
+201 Created
+```
+```json
+{
+	"id": "1",
+	"name": "Marcos",
+	"email": "marcos@mail.com",
+	"contactNumber": "35991755445",
+	"createdAt": 06/02/2023
+}
+```
+
+### Possíveis Erros:
+| Código do Erro | Descrição |
+|----------------|-----------|
+| 409 Conflict   | Email already registered. |
+| 409 Conflict   | Name already registered. |
+| 409 Conflict   | Phone number already registered. |
+
+---
+
+### 1.2. **Listando Contatos**
+
+[ Voltar aos Endpoints ](#5-endpoints)
+
+### `/contact/all/contacts`
+
+### Exemplo de Request:
+```
+GET /users
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+```json
+Vazio
+```
+
+### Exemplo de Response:
+```
+200 OK
+```
+```json
+[
+	{
+		"id": "1",
+		"name": "user",
+		"email": "user@mail.com",
+		"contactNumber": "35991755445",
+		"isAdm": true
+		"createdAt": 06/02/2024
+	},
+	{
+		"id": "2",
+		"name": "user3",
+		"email": "user3@mail.com",
+		"contactNumber": "35991753344",
+		"isAdm": true
+		"createdAt": 06/02/2024
+	}
+]
+```
+
+### Possíveis Erros:
+Se nenhum usuário cadastrado, irá retornar uma lista vazia.
+
+---
+
+### 1.3. **Listar Contato por ID**
+
+### `/contact/:id`
+
+### Exemplo de Request:
+```
+GET /contact/1
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+| Parâmetro   | Tipo        | Descrição                             |
+|-------------|-------------|---------------------------------------|
+|      id     | string      | Identificador único do contato (Contact) |
+
+### Corpo da Requisição:
+```json
+Vazio
+```
+
+### Exemplo de Response:
+```
+200 OK
+```
+```json
+{
+	"id": "1",
+	"name": "Marcos",
+	"email": "marcos@mail.com",
+	"contactNumber": "35991755445",
+	"createdAt": 06/02/2024
+}
+```
+
+### Possíveis Erros:
+| Código do Erro | Descrição |
+|----------------|-----------|
+| 404 Not Found   | Contact not found. |
+
+---
+### 1.4. **Atualização de contatos por ID**
+
+### `/contact/:id`
+
+### Exemplo de Request:
+```
+GET /contact/1
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+| Parâmetro   | Tipo        | Descrição                             |
+|-------------|-------------|------------------------------------------|
+|      id     | string      | Identificador único do contato (Contact) |
+
+### Corpo da Requisição:
+```json
+	"name": "Marcos novo",
+	"email": "user2@mail.com",
+	"contactNumber": "35991755445"
+```
+
+### Exemplo de Response:
+```
+200 OK
+```
+```json
+{
+	"id": "1",
+	"name": "user2",
+	"email": "user2@mail.com",
+	"contactNumber": "35991755445",
+	"isAdm": true,
+	"createdAt": 06/02/2024
+}
+```
+
+### Possíveis Erros:
+| Código do Erro | Descrição |
+|----------------|-----------|
+| 404 Not Found   | User not found. |
+| 409 Conflict   | Email already registered.|
+| 409 Conflict   | Phone number already registered.|
+| 409 Conflict   | Name number already registered.|
+---
+### 1.5. **Deleção de contatos por ID**
+
+### `/contact/:id`
+
+### Exemplo de Request:
+```
+GET /users/1
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+| Parâmetro   | Tipo        | Descrição                             |
+|-------------|-------------|---------------------------------------|
+|      id     | string      | Identificador único do contato (Contact) |
+
+### Corpo da Requisição:
+```json
+vazio
+```
+
+### Exemplo de Response:
+```
+200 OK
+```
+```json
+{
+vazio
+}
+```
+
+### Possíveis Erros:
+| Código do Erro | Descrição |
+|----------------|-----------|
+| 404 Not Found   | Contact not found. |
+---
+
