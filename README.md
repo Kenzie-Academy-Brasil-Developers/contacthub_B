@@ -1,18 +1,5 @@
 # Documentação da API - Contact Hub
 
-## Tabela de Conteúdos
-
-- [Visão Geral](#1-visão-geral)
-- [Diagrama ER](#2-diagrama-er)
-- [Início Rápido](#3-início-rápido)
-    - [Instalando Dependências](#31-instalando-dependências)
-    - [Variáveis de Ambiente](#32-variáveis-de-ambiente)
-    - [Migrations](#33-migrations)
-- [Autenticação](#4-autenticação)
-- [Endpoints](#5-endpoints)
-
----
-
 ## 1. Visão Geral
 
 Visão geral do projeto, um pouco das tecnologias usadas.
@@ -23,11 +10,6 @@ Visão geral do projeto, um pouco das tecnologias usadas.
 - [PostgreSQL](https://www.postgresql.org/)
 - [TypeORM](https://typeorm.io/)
 
-A URL base da aplicação:
-local: http://localhost:3000
-produção:
-
----
 
 ## 2. Diagrama ER
 [ Voltar para o topo ](#tabela-de-conteúdos)
@@ -40,8 +22,6 @@ Diagrama ER da API definindo bem as relações entre as tabelas do banco de dado
 ---
 
 ## 3. Início Rápido
-[ Voltar para o topo ](#tabela-de-conteúdos)
-
 
 ### 3.1. Instalando Dependências
 
@@ -65,13 +45,10 @@ Configure suas variáveis de ambiente com suas credenciais do Postgres e uma nov
 Execute as migrations com o comando:
 
 ```
-yarn typeorm migration:run -d src/data-source.ts
+npm typeorm migration:run -d src/data-source.ts
 ```
-
 ---
 ## 4. Autenticação
-[ Voltar para o topo ](#tabela-de-conteúdos)
-
 
 Por enquanto, não foi implementada autenticação.
 
@@ -79,14 +56,13 @@ Por enquanto, não foi implementada autenticação.
 
 ## 5. Endpoints
 
-[ Voltar para o topo ](#tabela-de-conteúdos)
 
 ### Índice
 
 - [Users](#1-users)
   - [POST - /users](#11-criação-de-usuário)
   - [GET - /users/all/users](#12-listando-usuários)
-	- [GET - /users/:id](#13-listar-usuário-por-id)
+  - [GET - /users/:id](#13-listar-usuário-por-id)
   - [PATCH - /users/:id](#14-listando-usuários)
   - [DELETE - /users/:id](#12-listando-usuários)
 - [Contacts](#2-contacts)
