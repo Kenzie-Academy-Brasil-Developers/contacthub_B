@@ -30,6 +30,7 @@ export const checkingToken = (
         message: "Invalid token",
       });
     }
+
     res.locals.userId = decoded.sub;
     res.locals.admin = decoded.admin;
     return next();
