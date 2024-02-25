@@ -24,8 +24,8 @@ class User {
   @Column({ length: 120 })
   password: string;
 
-  @Column({ type: "numeric", unique: true })
-  contactNumber: number;
+  @Column({ length: 15})
+  contactNumber: string;
 
   @CreateDateColumn({ type: "date" })
   createdAt: string;

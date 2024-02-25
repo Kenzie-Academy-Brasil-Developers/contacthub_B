@@ -6,4 +6,4 @@ import { checkingToken } from "../middlewares/globals.middlewares";
 export const reportRouter: Router = Router();
 reportRouter.use("/report", reportRouter);
 
-reportRouter.get("/:id", checkingToken, getFullReportController);
+reportRouter.get("/", checkingToken, getFullReportController);
