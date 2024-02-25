@@ -15,8 +15,6 @@ A URL base da aplicação em produção: https://contacthubws.onrender.com
 ---
 
 ## 2. Diagrama ER
-[ Voltar para o topo ](#tabela-de-conteúdos)
-
 
 Diagrama ER da API definindo bem as relações entre as tabelas do banco de dados.
 
