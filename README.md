@@ -63,7 +63,7 @@ npm typeorm migration:run -d src/data-source.ts
 | GET      |/contact/all/contacts| 
 | PATCH     |/contact/:id|
 | DELETE     |/contact/:id|
-| GET     |report/:id|
+| GET     |/report/:id|
 
 ##4.1. A autenticação é feita por meio do Login (POST /login), gerando um token (Bearer Token) de acesso.
 
