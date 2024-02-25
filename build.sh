@@ -4,8 +4,9 @@
 cd src
 tsc
 set -o errexit
-psql -U astol -d contacHubDB -c "DELETE FROM contacts;"
-psql -U astol -d contacHubDB -c "DELETE FROM users;"
+
+yarn DROP TABLES;
+
 yarn
 yarn build
 yarn typeorm migration:run -d dist/data-source
