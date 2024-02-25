@@ -63,6 +63,7 @@ npm typeorm migration:run -d src/data-source.ts
 | GET      |/contact/all/contacts| 
 | PATCH     |/contact/:id|
 | DELETE     |/contact/:id|
+| GET     |report/:id|
 
 ##4.1. A autenticação é feita por meio do Login (POST /login), gerando um token (Bearer Token) de acesso.
 
@@ -77,7 +78,7 @@ O objeto User é definido como:
 | name           | string | O nome do usuário.                              |
 | email          | string | O e-mail do usuário.                            |
 | password       | string | A senha de acesso do usuário                    |
-| contactNumber  | number | A senha de acesso do usuário                    |
+| contactNumber  | string | número de telefone do usuário                   |
 | admin          | boolean| Define se um usuário é Administrador ou não.    |
 | createdAt      | date   | Data de criação do usuário                      |
 
@@ -110,7 +111,7 @@ Content-type: application/json
 {
 	"name": "user",
 	"email": "user@mail.com",
-	"contactNumber": 35998776644,
+	"contactNumber": "35998776644",
 	"password": "1234",
 	"admin": true,
 }
@@ -124,7 +125,7 @@ Content-type: application/json
 	"id": "1",
 	"name": "user",
 	"email": "user@mail.com",
-	"contactNumber": 35998776644,
+	"contactNumber": "35998776644",
 	"isAdm": true,
 	"createdAt": 06/02/2023
 }
@@ -167,7 +168,7 @@ Vazio
 		"id": "1",
 		"name": "user",
 		"email": "user@mail.com",
-		"contactNumber": 35998776644,
+		"contactNumber": "35998776644",
 		"isAdm": true
 		"createdAt": 06/02/2024
 	}
@@ -211,7 +212,7 @@ Vazio
 	"id": "1",
 	"name": "user",
 	"email": "user@mail.com",
-	"contactNumber": 35998776644,
+	"contactNumber": "35998776644",
 	"isAdm": true,
 	"createdAt": 06/02/2024
 }
@@ -245,7 +246,7 @@ Content-type: application/json
 ```json
 	"name": "user2",
 	"email": "user2@mail.com",
-	"contactNumber": 35998756786,
+	"contactNumber": "35998756786",
 	"password": "12345"
 ```
 
@@ -258,7 +259,7 @@ Content-type: application/json
 	"id": "1",
 	"name": "user2",
 	"email": "user2@mail.com",
-	"contactNumber": 35998756786,
+	"contactNumber": "35998756786",
 	"isAdm": true,
 	"createdAt": 06/02/2024
 }
@@ -320,7 +321,7 @@ O objeto Contact é definido como:
 | id             | number | Identificador único do contato                  |
 | name           | string | O nome do contato.                              |
 | email          | string | O e-mail do contato.                            |
-| contactNumber  | number | Número de telefone do contato.                  |
+| contactNumber  | string | Número de telefone do contato.                  |
 | createdAt      | date   | Data de criação do contato.                     |
 
 ###1.1. Endpoints
@@ -548,3 +549,52 @@ vazio
 | 404 Not Found   | Contact not found. |
 ---
 
+## 3. **Report - Relatório**
+
+###1.1. Endpoints
+
+| Método   | Rota       | Descrição                               |
+|----------|------------|-----------------------------------------|
+| GET   | /report/:id     | Leitura de relatório geral            |
+---
+### `/report/:id`
+
+### Exemplo de Request:
+```
+GET /report/:id
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+```json
+{
+vazio
+}
+```
+
+```
+200 OK
+```
+```json
+{
+	"user": {
+		"id": 2,
+		"name": "u",
+		"email": "u5@kenzie.com.br",
+		"admin": true,
+		"contactNumber": "13234",
+		"createdAt": "2024-02-25"
+	},
+	"totalContacts": 1,
+	"recentContacts": [
+		{
+			"id": 3,
+			"name": "J2er",
+			"email": "22@3kenze.com.br",
+			"contactNumber": "5532323223",
+			"createdAt": "2024-02-25"
+		}
+	]
+}
+```
