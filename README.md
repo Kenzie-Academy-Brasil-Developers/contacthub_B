@@ -20,7 +20,7 @@ A URL base da aplicação em produção: https://contacthubws.onrender.com
 
 Diagrama ER da API definindo bem as relações entre as tabelas do banco de dados.
 
-![DER](DER.PNG)
+![DER](DER.png)
 
 ---
 
