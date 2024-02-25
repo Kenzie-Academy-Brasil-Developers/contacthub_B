@@ -65,3 +65,4 @@ export const updateUserService = async (
 export const deleteUserService = async (user: User): Promise<void> => {
   await userRepository.delete(user);
 };
+

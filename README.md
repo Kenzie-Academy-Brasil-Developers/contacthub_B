@@ -1,21 +1,9 @@
 # Documentação da API - Contact Hub
-
-## Tabela de Conteúdos
-
-- [Visão Geral](#1-visão-geral)
-- [Diagrama ER](#2-diagrama-er)
-- [Início Rápido](#3-início-rápido)
-    - [Instalando Dependências](#31-instalando-dependências)
-    - [Variáveis de Ambiente](#32-variáveis-de-ambiente)
-    - [Migrations](#33-migrations)
-- [Autenticação](#4-autenticação)
-- [Endpoints](#5-endpoints)
-
 ---
 
 ## 1. Visão Geral
 
-Visão geral do projeto, um pouco das tecnologias usadas.
+Tecnologias usadas no desenvolvimento desta api:
 
 - [NodeJS](https://nodejs.org/en/)
 - [Express](https://expressjs.com/pt-br/)
@@ -23,10 +11,7 @@ Visão geral do projeto, um pouco das tecnologias usadas.
 - [PostgreSQL](https://www.postgresql.org/)
 - [TypeORM](https://typeorm.io/)
 
-A URL base da aplicação:
-local: http://localhost:3000
-produção:
-
+A URL base da aplicação em produção: https://contacthubws.onrender.com
 ---
 
 ## 2. Diagrama ER
@@ -39,11 +24,7 @@ Diagrama ER da API definindo bem as relações entre as tabelas do banco de dado
 
 ---
 
-## 3. Início Rápido
-[ Voltar para o topo ](#tabela-de-conteúdos)
-
-
-### 3.1. Instalando Dependências
+### 3 Instalando Dependências
 
 Clone o projeto em sua máquina e instale as dependências com o comando:
 
@@ -51,7 +32,7 @@ Clone o projeto em sua máquina e instale as dependências com o comando:
 npm install
 ```
 
-### 3.2. Variáveis de Ambiente
+### 3.1. Variáveis de Ambiente
 
 Em seguida, crie um arquivo **.env**, copiando o formato do arquivo **.env.example**:
 ```
@@ -60,38 +41,30 @@ cp .env.example .env
 
 Configure suas variáveis de ambiente com suas credenciais do Postgres e uma nova database da sua escolha.
 
-### 3.3. Migrations
+### 3.2. Migrations
 
 Execute as migrations com o comando:
 
 ```
-yarn typeorm migration:run -d src/data-source.ts
+npm typeorm migration:run -d src/data-source.ts
 ```
-
 ---
 ## 4. Autenticação
-[ Voltar para o topo ](#tabela-de-conteúdos)
 
+-É preciso estar autenticado para acessar as seguintes rotas:
+| Método   | Rota(USER) | 
+|----------|------------| 
+| GET      | /users/all/users| 
+| GET      | /users/:id|  
+| PATCH      |/users/:id| 
+| DELETE     |/users/:id| 
+| POST      |/contact| 
+| GET      |/contact/:id| 
+| GET      |/contact/all/contacts| 
+| PATCH     |/contact/:id|
+| DELETE     |/contact/:id|
 
-Por enquanto, não foi implementada autenticação.
-
----
-
-## 5. Endpoints
-
-[ Voltar para o topo ](#tabela-de-conteúdos)
-
-### Índice
-
-- [Users](#1-users)
-  - [POST - /users](#11-criação-de-usuário)
-  - [GET - /users/all/users](#12-listando-usuários)
-	- [GET - /users/:id](#13-listar-usuário-por-id)
-  - [PATCH - /users/:id](#14-listando-usuários)
-  - [DELETE - /users/:id](#12-listando-usuários)
-- [Contacts](#2-contacts)
-- [Login](#3-login)
----
+##4.1. A autenticação é feita por meio do Login (POST /login), gerando um token (Bearer Token) de acesso.
 
 ## 1. **Users**
 [ Voltar para os Endpoints ](#5-endpoints)
@@ -105,20 +78,21 @@ O objeto User é definido como:
 | email          | string | O e-mail do usuário.                            |
 | password       | string | A senha de acesso do usuário                    |
 | contactNumber  | number | A senha de acesso do usuário                    |
-| isAdm          | boolean| Define se um usuário é Administrador ou não.    |
+| admin          | boolean| Define se um usuário é Administrador ou não.    |
 | createdAt      | date   | Data de criação do usuário                      |
 
-### Endpoints
+###1.1. Endpoints
 
 | Método   | Rota       | Descrição                               |
 |----------|------------|-----------------------------------------|
 | POST     | /users     | Criação de um usuário.                  |
 | GET      | /users     | Lista todos os usuários                 |
-| GET      | /users/:user_id     | Lista um usuário usando seu ID como parâmetro 
-
+| GET      | /users/:id | Lista um usuário usando seu ID como parâmetro|
+| PATCH      |/users/:id| Atualização de um usuário usando seu id como parâmetro|
+| DELETE     |/users/:id| Deleção de um usuário usando seu id como parâmetro|
 ---
 
-### 1.1. **Criação de Usuário**
+### 1.2. **Criação de Usuário**
 
 [ Voltar para os Endpoints ](#5-endpoints)
 
@@ -127,7 +101,6 @@ O objeto User é definido como:
 ### Exemplo de Request:
 ```
 POST /users
-Host: http://suaapi.com/v1
 Authorization: None
 Content-type: application/json
 ```
@@ -135,51 +108,25 @@ Content-type: application/json
 ### Corpo da Requisição:
 ```json
 {
-	"name": "eDuArDo",
-	"email": "edu@mail.com",
+	"name": "user",
+	"email": "user@mail.com",
+	"contactNumber": 35998776644,
 	"password": "1234",
-	"isAdm": true
+	"admin": true,
 }
 ```
 
-### Schema de Validação com Yup:
-```javascript
-name: yup
-        .string()
-	.required()
-	.transform((value, originalValue) => { 
-		return titlelify(originalValue) 
-	}),
-email: yup
-        .string()
-	.email()
-	.required()
-	.transform((value, originalValue) => { 
-		return originalValue.toLowerCase() 
-	}),
-password: yup
-        .string()
-	.required()
-	.transform((value, originalValue) => { 
-		return bcrypt.hashSync(originalValue, 10) 
-	}),
-isAdm: yup
-        .boolean()
-	.required(),
-```
-OBS.: Chaves não presentes no schema serão removidas.
-
-### Exemplo de Response:
 ```
 201 Created
 ```
-
 ```json
 {
-	"id": "9cda28c9-e540-4b2c-bf0c-c90006d37893",
-	"name": "Eduardo",
-	"email": "edu@mail.com",
-	"isAdm": true
+	"id": "1",
+	"name": "user",
+	"email": "user@mail.com",
+	"contactNumber": 35998776644,
+	"isAdm": true,
+	"createdAt": 06/02/2023
 }
 ```
 
@@ -190,17 +137,255 @@ OBS.: Chaves não presentes no schema serão removidas.
 
 ---
 
-### 1.2. **Listando Usuários**
+### 1.3. **Listando Usuários**
 
 [ Voltar aos Endpoints ](#5-endpoints)
 
-### `/users`
+### `/users/all/users`
 
 ### Exemplo de Request:
 ```
 GET /users
-Host: http://suaapi.com/v1
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+```json
+{
+Vazio
+}
+```
+
+### Exemplo de Response:
+```
+200 OK
+```
+```json
+[
+	{
+		"id": "1",
+		"name": "user",
+		"email": "user@mail.com",
+		"contactNumber": 35998776644,
+		"isAdm": true
+		"createdAt": 06/02/2024
+	}
+]
+```
+
+### Possíveis Erros:
+Se nenhum usuário cadastrado, irá retornar uma lista vazia.
+
+---
+
+### 1.4. **Listar Usuário por ID**
+
+[ Voltar aos Endpoints ](#5-endpoints)
+
+### `/users/:id`
+
+### Exemplo de Request:
+```
+GET /users/1
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+| Parâmetro   | Tipo        | Descrição                             |
+|-------------|-------------|---------------------------------------|
+|      id     | string      | Identificador único do usuário (User) |
+
+### Corpo da Requisição:
+```json
+Vazio
+```
+
+### Exemplo de Response:
+```
+200 OK
+```
+```json
+{
+	"id": "1",
+	"name": "user",
+	"email": "user@mail.com",
+	"contactNumber": 35998776644,
+	"isAdm": true,
+	"createdAt": 06/02/2024
+}
+```
+
+### Possíveis Erros:
+| Código do Erro | Descrição |
+|----------------|-----------|
+| 404 Not Found   | User not found. |
+
+---
+### 1.4. **Atualização de usuários por ID**
+
+[ Voltar aos Endpoints ](#5-endpoints)
+
+### `/users/:id`
+
+### Exemplo de Request:
+```
+GET /users/1
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+| Parâmetro   | Tipo        | Descrição                             |
+|-------------|-------------|---------------------------------------|
+|      id     | string      | Identificador único do usuário (User) |
+
+### Corpo da Requisição:
+```json
+	"name": "user2",
+	"email": "user2@mail.com",
+	"contactNumber": 35998756786,
+	"password": "12345"
+```
+
+### Exemplo de Response:
+```
+200 OK
+```
+```json
+{
+	"id": "1",
+	"name": "user2",
+	"email": "user2@mail.com",
+	"contactNumber": 35998756786,
+	"isAdm": true,
+	"createdAt": 06/02/2024
+}
+```
+
+### Possíveis Erros:
+| Código do Erro | Descrição |
+|----------------|-----------|
+| 404 Not Found  | User not found. |
+| 409 Conflict   | Email already registered.|
+| 409 Conflict   | Phone number already registered.|
+| 409 Conflict   | Name number already registered.|
+---
+### 1.5. **Deleção de usuários por ID**
+
+[ Voltar aos Endpoints ](#5-endpoints)
+
+### `/users/:id`
+
+### Exemplo de Request:
+```
+GET /users/1
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+| Parâmetro   | Tipo        | Descrição                             |
+|-------------|-------------|---------------------------------------|
+|      id     | string      | Identificador único do usuário (User) |
+
+### Corpo da Requisição:
+```json
+vazio
+```
+
+### Exemplo de Response:
+```
+200 OK
+```
+```json
+{
+vazio
+}
+```
+
+### Possíveis Erros:
+| Código do Erro | Descrição |
+|----------------|-----------|
+| 404 Not Found   | User not found. |
+---
+
+## 2. **Contacts**
+
+O objeto Contact é definido como:
+
+| Campo          | Tipo   | Descrição                                       |
+| ---------------|--------|-------------------------------------------------|
+| id             | number | Identificador único do contato                  |
+| name           | string | O nome do contato.                              |
+| email          | string | O e-mail do contato.                            |
+| contactNumber  | number | Número de telefone do contato.                  |
+| createdAt      | date   | Data de criação do contato.                     |
+
+###1.1. Endpoints
+
+| Método   | Rota       | Descrição                               |
+|----------|------------|-----------------------------------------|
+| POST     | /contact     | Criação de um contato.                  |
+| GET      | /contact     | Lista todos os contatos.                 |
+| GET      | /contact/:id | Lista um contato usando seu ID como parâmetro|
+| PATCH      |/contact/:id| Atualização de um contato usando seu id como parâmetro|
+| DELETE     |/contact/:id| Deleção de um contato usando seu id como parâmetro|
+---
+
+### 1.2. **Criação de Contato**
+
+### `/contact`
+
+### Exemplo de Request:
+```
+POST /contact
 Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+```json
+{
+	"name": "Marcos",
+	"email": "marcos@mail.com",
+	"contactNumber": "35991755445",
+}
+```
+
+```
+201 Created
+```
+```json
+{
+	"id": "1",
+	"name": "Marcos",
+	"email": "marcos@mail.com",
+	"contactNumber": "35991755445",
+	"createdAt": 06/02/2023
+}
+```
+
+### Possíveis Erros:
+| Código do Erro | Descrição |
+|----------------|-----------|
+| 409 Conflict   | Email already registered. |
+| 409 Conflict   | Name already registered. |
+| 409 Conflict   | Phone number already registered. |
+
+---
+
+### 1.2. **Listando Contatos**
+
+[ Voltar aos Endpoints ](#5-endpoints)
+
+### `/contact/all/contacts`
+
+### Exemplo de Request:
+```
+GET /users
+Authorization: Bearer Token
 Content-type: application/json
 ```
 
@@ -216,37 +401,44 @@ Vazio
 ```json
 [
 	{
-		"id": "9cda28c9-e540-4b2c-bf0c-c90006d37893",
-		"name": "Eduardo",
-		"email": "edu@mail.com",
+		"id": "1",
+		"name": "user",
+		"email": "user@mail.com",
+		"contactNumber": "35991755445",
 		"isAdm": true
+		"createdAt": 06/02/2024
+	},
+	{
+		"id": "2",
+		"name": "user3",
+		"email": "user3@mail.com",
+		"contactNumber": "35991753344",
+		"isAdm": true
+		"createdAt": 06/02/2024
 	}
 ]
 ```
 
 ### Possíveis Erros:
-Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
+Se nenhum usuário cadastrado, irá retornar uma lista vazia.
 
 ---
 
-### 1.3. **Listar Usuário por ID**
+### 1.3. **Listar Contato por ID**
 
-[ Voltar aos Endpoints ](#5-endpoints)
-
-### `/users/:user_id`
+### `/contact/:id`
 
 ### Exemplo de Request:
 ```
-GET /users/9cda28c9-e540-4b2c-bf0c-c90006d37893
-Host: http://suaapi.com/v1
-Authorization: None
+GET /contact/1
+Authorization: Bearer Token
 Content-type: application/json
 ```
 
 ### Parâmetros da Requisição:
 | Parâmetro   | Tipo        | Descrição                             |
 |-------------|-------------|---------------------------------------|
-| user_id     | string      | Identificador único do usuário (User) |
+|      id     | string      | Identificador único do contato (Contact) |
 
 ### Corpo da Requisição:
 ```json
@@ -259,10 +451,55 @@ Vazio
 ```
 ```json
 {
-	"id": "9cda28c9-e540-4b2c-bf0c-c90006d37893",
-	"name": "Eduardo",
-	"email": "edu@mail.com",
-	"isAdm": true
+	"id": "1",
+	"name": "Marcos",
+	"email": "marcos@mail.com",
+	"contactNumber": "35991755445",
+	"createdAt": 06/02/2024
+}
+```
+
+### Possíveis Erros:
+| Código do Erro | Descrição |
+|----------------|-----------|
+| 404 Not Found   | Contact not found. |
+
+---
+### 1.4. **Atualização de contatos por ID**
+
+### `/contact/:id`
+
+### Exemplo de Request:
+```
+GET /contact/1
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+| Parâmetro   | Tipo        | Descrição                             |
+|-------------|-------------|------------------------------------------|
+|      id     | string      | Identificador único do contato (Contact) |
+
+### Corpo da Requisição:
+```json
+	"name": "Marcos novo",
+	"email": "user2@mail.com",
+	"contactNumber": "35991755445"
+```
+
+### Exemplo de Response:
+```
+200 OK
+```
+```json
+{
+	"id": "1",
+	"name": "user2",
+	"email": "user2@mail.com",
+	"contactNumber": "35991755445",
+	"isAdm": true,
+	"createdAt": 06/02/2024
 }
 ```
 
@@ -270,3 +507,44 @@ Vazio
 | Código do Erro | Descrição |
 |----------------|-----------|
 | 404 Not Found   | User not found. |
+| 409 Conflict   | Email already registered.|
+| 409 Conflict   | Phone number already registered.|
+| 409 Conflict   | Name number already registered.|
+---
+### 1.5. **Deleção de contatos por ID**
+
+### `/contact/:id`
+
+### Exemplo de Request:
+```
+GET /users/1
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+| Parâmetro   | Tipo        | Descrição                             |
+|-------------|-------------|---------------------------------------|
+|      id     | string      | Identificador único do contato (Contact) |
+
+### Corpo da Requisição:
+```json
+vazio
+```
+
+### Exemplo de Response:
+```
+200 OK
+```
+```json
+{
+vazio
+}
+```
+
+### Possíveis Erros:
+| Código do Erro | Descrição |
+|----------------|-----------|
+| 404 Not Found   | Contact not found. |
+---
+

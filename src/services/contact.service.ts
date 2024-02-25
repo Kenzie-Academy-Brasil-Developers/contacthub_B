@@ -45,9 +45,19 @@ export const readContacSpecificService = async (
   return contact;
 };
 
-export const readAllContactsService = async (): Promise<TReadAllContact> => {
-  const contacts: Contact[] = await contactRepository.find();
+export const readAllContactsService = async (userId: number): Promise<TReadAllContact> => {
+  const user: User | null = await userRepository.findOne({
+    where: {
+      id: userId,
+    },
+  });
 
+  if (!user) {
+    throw new AppError("User not found", 404);
+  }
+
+  const contacts: Contact[] = await contactRepository.find({ where: {user} });
+  
   return contacts;
 };
 

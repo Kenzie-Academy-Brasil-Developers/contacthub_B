@@ -5,7 +5,7 @@ export const contactSchema = z.object({
   id: z.number().int().positive(),
   name: z.string().max(45),
   email: z.string().max(45).email(),
-  contactNumber: z.string().max(16),
+  contactNumber: z.string(),
   createdAt: z.string(),
   user: z.instanceof(User),
 });
