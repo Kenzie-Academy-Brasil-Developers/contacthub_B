@@ -68,7 +68,6 @@ npm typeorm migration:run -d src/data-source.ts
 ##4.1. A autenticação é feita por meio do Login (POST /login), gerando um token (Bearer Token) de acesso.
 
 ## 1. **Users**
-[ Voltar para os Endpoints ](#5-endpoints)
 
 O objeto User é definido como:
 
@@ -95,7 +94,6 @@ O objeto User é definido como:
 
 ### 1.2. **Criação de Usuário**
 
-[ Voltar para os Endpoints ](#5-endpoints)
 
 ### `/users`
 
@@ -140,7 +138,6 @@ Content-type: application/json
 
 ### 1.3. **Listando Usuários**
 
-[ Voltar aos Endpoints ](#5-endpoints)
 
 ### `/users/all/users`
 
@@ -182,7 +179,6 @@ Se nenhum usuário cadastrado, irá retornar uma lista vazia.
 
 ### 1.4. **Listar Usuário por ID**
 
-[ Voltar aos Endpoints ](#5-endpoints)
 
 ### `/users/:id`
 
@@ -226,7 +222,6 @@ Vazio
 ---
 ### 1.4. **Atualização de usuários por ID**
 
-[ Voltar aos Endpoints ](#5-endpoints)
 
 ### `/users/:id`
 
@@ -275,7 +270,6 @@ Content-type: application/json
 ---
 ### 1.5. **Deleção de usuários por ID**
 
-[ Voltar aos Endpoints ](#5-endpoints)
 
 ### `/users/:id`
 
@@ -379,7 +373,6 @@ Content-type: application/json
 
 ### 1.2. **Listando Contatos**
 
-[ Voltar aos Endpoints ](#5-endpoints)
 
 ### `/contact/all/contacts`
 
