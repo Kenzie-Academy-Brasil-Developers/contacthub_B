@@ -34,7 +34,9 @@ export const readAllContactController = async (
   res: Response,
   next: NextFunction
 ): Promise<Response> => {
-  const contact = await readAllContactsService();
+  const userId = res.locals.userId;
+
+  const contact = await readAllContactsService(userId);
 
   return res.status(200).json(contact);
 };

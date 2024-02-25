@@ -7,8 +7,7 @@ import {
   updateContactController,
 } from "../controllers/contact.controller";
 import {
-  checkingBody,
-  checkingToken,
+  checkingBody, checkingToken,
 } from "../middlewares/globals.middlewares";
 import { createNewContactSchema } from "../schemas/contact.schema";
 import {
@@ -32,7 +31,7 @@ contactRouter.post(
 );
 
 
-contactRouter.get("/:id", checkingToken, readContacSpecificController);
+contactRouter.get("/:id", checkingToken,readContacSpecificController);
 
 contactRouter.get("/all/contacts", checkingToken, readAllContactController);
 
@@ -47,4 +46,4 @@ contactRouter.patch(
 );
 
 
-contactRouter.delete("/:id", checkingToken, deleteContactController);
+contactRouter.delete("/:id",checkingToken, deleteContactController);
