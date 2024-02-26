@@ -334,7 +334,7 @@ O objeto Contact é definido como:
 ### Exemplo de Request:
 ```
 POST /contact
-Authorization: None
+Authorization: Bearer Token
 Content-type: application/json
 ```
 
@@ -553,7 +553,7 @@ vazio
 ### Exemplo de Request:
 ```
 GET /report/:id
-Authorization: None
+Authorization: Bearer Token
 Content-type: application/json
 ```
 
